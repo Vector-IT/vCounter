@@ -1,6 +1,11 @@
 (function( $ ) {
 
-	$.fn.vCounter = function() {
+	$.fn.vCounter = function(options) {
+		var settings = $.extend({
+			speed: 2000,
+			easing: 'swing'
+		}, options );
+
 		return this.each(function(i, elem) {
 			$(elem).prop('animando', false);
 			if (isScrolledIntoView(elem)) {
@@ -19,8 +24,8 @@
 					$(elem).prop('contador', 0).animate({
 						contador: $(elem).text()
 					}, {
-						duration: 1000,
-						easing: 'swing',
+						duration: settings.speed,
+						easing: settings.easing,
 						step: function(now) {
 							$(this).text(Math.ceil(now));
 						}
